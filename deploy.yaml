@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: laravel 
+  labels:
+    webserver: laravel   #key value pair
+spec:
+  containers:
+  - name: cont1
+    image: baladoc2023/king
+    ports:
+      - containerPort: 8000
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: mynodeservice
+spec:
+  type: NodePort
+  selector: 
+    webserver: laravel   #key value pair
+  ports:
+    - port:  8000    #cluster ip port once node is created cluster ip will create
+      targetPort:  8000
+    #  nodePort : 32001   this will take default value 
